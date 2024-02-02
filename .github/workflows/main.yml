@@ -25,22 +25,21 @@ jobs:
     - name: Run Python Script
       run: |
         import requests
-        from time import sleep
+        from datetime import datetime
 
         url = 'http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.105/'
 
-        count = 15
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
 
         response = requests.get(url)
-        with open(f'imagem_{count}.png', 'wb') as file:
+        with open(f'imagem_{timestamp}.png', 'wb') as file:
             file.write(response.content)
-        print(f'imagem_{count}.png criada')
-        count += 1
+        print(f'imagem_{timestamp}.png criada')
 
     - name: Commit and push
       run: |
-        git config --local user.email "joaosalgado605@gmail.com"
-        git config --local user.name "devictor8"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add -A
         git commit -m "Add new image"
         git push
