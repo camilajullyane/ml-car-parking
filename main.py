@@ -3,6 +3,7 @@ from time import sleep
 
 url = 'http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.105/'
 
+count = 15
 
 count = 15
 while True:
