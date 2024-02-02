@@ -23,4 +23,24 @@ jobs:
         pip install requests
 
     - name: Run Python Script
-      run: python main.py
+      run: |
+        import requests
+        from time import sleep
+
+        url = 'http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.105/'
+
+        count = 15
+
+        response = requests.get(url)
+        with open(f'imagem_{count}.png', 'wb') as file:
+            file.write(response.content)
+        print(f'imagem_{count}.png criada')
+        count += 1
+
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "Add new image"
+        git push
